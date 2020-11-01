@@ -1,5 +1,8 @@
 package dev.vozniack.jlearning.neural.structure;
 
+import dev.vozniack.jlearning.neural.exception.StructureException;
+import dev.vozniack.jlearning.neural.structure.feedforward.FeedforwardStructure;
+import dev.vozniack.jlearning.neural.structure.recursive.RecursiveStructure;
 import dev.vozniack.jlearning.neural.types.StructureType;
 
 public class StructureFactory {
@@ -9,8 +12,11 @@ public class StructureFactory {
             case FEEDFORWARD:
                 return new FeedforwardStructure(bias, neurons);
 
+            case RECURSIVE:
+                return new RecursiveStructure(bias, neurons);
+
             default:
-                throw new RuntimeException();
+                throw new StructureException("How did you throw it?");
         }
     }
 }
