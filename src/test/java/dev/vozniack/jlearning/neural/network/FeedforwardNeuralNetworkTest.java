@@ -1,6 +1,7 @@
 package dev.vozniack.jlearning.neural.network;
 
 import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.structure.StructureFactory;
 import dev.vozniack.jlearning.neural.types.LearningType;
 import dev.vozniack.jlearning.neural.types.StructureType;
@@ -15,7 +16,7 @@ public class FeedforwardNeuralNetworkTest {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
                 .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
                 .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0))
-                .dataset(null)
+                .dataset(Dataset.builder().inputs(4).outputs(8).build())
                 .build();
 
         neuralNetwork.init();

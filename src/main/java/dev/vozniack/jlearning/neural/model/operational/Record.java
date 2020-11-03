@@ -7,11 +7,9 @@ import java.util.List;
 
 @Getter
 @Builder
-public class Dataset {
+public class Record {
 
-    private final Integer inputs;
+    private final List<Double> inputValues;
 
-    private final Integer outputs;
-
-    private final List<Record> records;
+    private final List<Double> correctAnswers;
 }
