@@ -2,6 +2,7 @@ package dev.vozniack.jlearning.neural.util;
 
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Neuron;
+import dev.vozniack.jlearning.neural.network.NeuralNetwork;
 
 public class CountUtil {
 
@@ -19,5 +20,9 @@ public class CountUtil {
 
     public static Double countHiddenErrorSignal(Neuron neuron) {
         return (neuron.getOutput() * (1d - neuron.getOutput())) * (neuron.getOutputs().stream().mapToDouble(connection -> connection.getWeight() * connection.getOutput().getErrorSignal()).sum());
+    }
+
+    public static Double countWeight(NeuralNetwork neuralNetwork, Connection connection) {
+        return connection.getWeight() + (neuralNetwork.getLearning().getFactor() * connection.getOutput().getErrorSignal() * connection.getInput().getOutput());
     }
 }
