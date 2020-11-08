@@ -1,5 +1,6 @@
 package dev.vozniack.jlearning.neural.structure;
 
+import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
 import lombok.Getter;
@@ -30,4 +31,14 @@ public abstract class Structure {
     public abstract void addHiddenLayer(Integer neurons);
 
     public abstract void createConnections();
+
+    public void initConnections(List<Double> weights) {
+        if (connections.size() != weights.size()) {
+            throw new StructureException("Number of connections is different than number of new weights");
+        } else {
+            for (int i = 0; i < connections.size(); i++) {
+                connections.get(i).setWeight(weights.get(i));
+            }
+        }
+    }
 }

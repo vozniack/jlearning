@@ -1,10 +1,11 @@
 package dev.vozniack.jlearning.neural.structure.feedforward;
 
+import dev.vozniack.jlearning.neural.activation.ActivationFunction;
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
 import dev.vozniack.jlearning.neural.model.structure.Neuron;
 import dev.vozniack.jlearning.neural.structure.Structure;
-import dev.vozniack.jlearning.neural.types.ActivationFunction;
+import dev.vozniack.jlearning.neural.types.ActivationType;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -36,7 +37,7 @@ public class FeedforwardStructureUtil {
     }
 
     private static Layer createLayer(Integer neurons) {
-        return new Layer(IntStream.range(0, neurons).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.SIGMOID);
+        return new Layer(IntStream.range(0, neurons).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.get(ActivationType.SIGMOID));
     }
 
     /* Connections */

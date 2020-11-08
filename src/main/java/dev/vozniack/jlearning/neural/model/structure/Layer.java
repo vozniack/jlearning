@@ -1,6 +1,6 @@
 package dev.vozniack.jlearning.neural.model.structure;
 
-import dev.vozniack.jlearning.neural.types.ActivationFunction;
+import dev.vozniack.jlearning.neural.activation.ActivationFunction;
 import lombok.Getter;
 
 import java.util.List;

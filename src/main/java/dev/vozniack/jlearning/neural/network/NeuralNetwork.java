@@ -2,7 +2,6 @@ package dev.vozniack.jlearning.neural.network;
 
 import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
-import dev.vozniack.jlearning.neural.model.operational.Output;
 import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.validator.Validator;
 import lombok.Getter;
@@ -32,9 +31,7 @@ public abstract class NeuralNetwork {
 
     public abstract void learn(Dataset dataset);
 
-    public abstract List<Double> run(List<Double> values);
-
-    public abstract Output getOutput();
+    public abstract List<Double> launch(List<Double> values);
 
     /* Validation */
 
@@ -46,7 +43,6 @@ public abstract class NeuralNetwork {
 
     protected void validate(List<Double> input) {
         validator.validateStructure(structure);
-        validator.validateLearning(learning);
         validator.validateInput(this, input);
     }
 }

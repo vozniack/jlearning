@@ -1,9 +1,10 @@
 package dev.vozniack.jlearning.neural.structure.feedforward;
 
+import dev.vozniack.jlearning.neural.activation.ActivationFunction;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
 import dev.vozniack.jlearning.neural.model.structure.Neuron;
 import dev.vozniack.jlearning.neural.structure.Structure;
-import dev.vozniack.jlearning.neural.types.ActivationFunction;
+import dev.vozniack.jlearning.neural.types.ActivationType;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -47,8 +48,8 @@ public class FeedforwardStructureUtilTest {
 
         LinkedList<Layer> layers = new LinkedList<>();
 
-        layers.add(new Layer(IntStream.range(0, 4).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.SIGMOID));
-        layers.add(new Layer(IntStream.range(0, 8).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.SIGMOID));
+        layers.add(new Layer(IntStream.range(0, 4).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.get(ActivationType.SIGMOID)));
+        layers.add(new Layer(IntStream.range(0, 8).mapToObj(iterator -> new Neuron()).collect(Collectors.toList()), ActivationFunction.get(ActivationType.SIGMOID)));
 
         structure.setLayers(layers);
         assertEquals(2, structure.getLayers().size());
