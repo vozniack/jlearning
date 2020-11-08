@@ -11,5 +11,5 @@ public class Record {
 
     private final List<Double> inputValues;
 
-    private final List<Double> correctAnswers;
+    private final List<Double> correctOutput;
 }

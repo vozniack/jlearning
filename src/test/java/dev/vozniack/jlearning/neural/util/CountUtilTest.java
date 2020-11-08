@@ -1,7 +1,6 @@
 package dev.vozniack.jlearning.neural.util;
 
 import dev.vozniack.jlearning.neural.learning.LearningFactory;
-import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Neuron;
 import dev.vozniack.jlearning.neural.network.FeedforwardNeuralNetwork;
@@ -75,7 +74,6 @@ public class CountUtilTest {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
                 .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
                 .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 0.34d))
-                .dataset(Dataset.builder().inputs(4).outputs(8).build())
                 .build();
 
         Neuron input = new Neuron();

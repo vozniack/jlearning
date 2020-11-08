@@ -5,12 +5,18 @@ import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.model.operational.Output;
 import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.validator.Validator;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
-@AllArgsConstructor
 public abstract class NeuralNetwork {
+
+    public NeuralNetwork(Structure structure, Learning learning, Validator validator) {
+        this.structure = structure;
+        this.learning = learning;
+        this.validator = validator;
+    }
 
     protected Structure structure;
 
@@ -20,11 +26,27 @@ public abstract class NeuralNetwork {
 
     protected Validator validator;
 
+    /* To implement */
+
     public abstract void init();
 
-    public abstract void run();
+    public abstract void learn(Dataset dataset);
 
-    public abstract void learn();
+    public abstract List<Double> run(List<Double> values);
 
     public abstract Output getOutput();
+
+    /* Validation */
+
+    protected void validate(Dataset dataset) {
+        validator.validateStructure(structure);
+        validator.validateLearning(learning);
+        validator.validateDataset(this, dataset);
+    }
+
+    protected void validate(List<Double> input) {
+        validator.validateStructure(structure);
+        validator.validateLearning(learning);
+        validator.validateInput(this, input);
+    }
 }

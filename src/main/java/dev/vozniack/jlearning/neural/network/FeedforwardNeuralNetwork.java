@@ -8,15 +8,17 @@ import dev.vozniack.jlearning.neural.util.RandUtil;
 import dev.vozniack.jlearning.neural.validator.FeedforwardValidator;
 import lombok.Builder;
 
+import java.util.List;
+
 public class FeedforwardNeuralNetwork extends NeuralNetwork {
 
-    public FeedforwardNeuralNetwork(Structure structure, Learning learning, Dataset dataset) {
-        super(structure, learning, dataset, new FeedforwardValidator());
+    public FeedforwardNeuralNetwork(Structure structure, Learning learning) {
+        super(structure, learning, new FeedforwardValidator());
     }
 
     @Builder
-    public static FeedforwardNeuralNetwork buildNetwork(Structure structure, Learning learning, Dataset dataset) {
-        return new FeedforwardNeuralNetwork(structure, learning, dataset);
+    public static FeedforwardNeuralNetwork buildNetwork(Structure structure, Learning learning) {
+        return new FeedforwardNeuralNetwork(structure, learning);
     }
 
     @Override
@@ -25,13 +27,15 @@ public class FeedforwardNeuralNetwork extends NeuralNetwork {
     }
 
     @Override
-    public void run() {
-        validator.validate(this);
+    public void learn(Dataset dataset) {
+        validate(dataset);
     }
 
     @Override
-    public void learn() {
-        validator.validate(this);
+    public List<Double> run(List<Double> input) {
+        validate(input);
+
+        return null;
     }
 
     @Override

@@ -2,22 +2,19 @@ package dev.vozniack.jlearning.neural.validator;
 
 import dev.vozniack.jlearning.neural.exception.DatasetException;
 import dev.vozniack.jlearning.neural.exception.LearningException;
+import dev.vozniack.jlearning.neural.exception.NetworkException;
 import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.network.NeuralNetwork;
 import dev.vozniack.jlearning.neural.structure.Structure;
 
+import java.util.List;
+
 public class FeedforwardValidator extends Validator {
 
     @Override
-    public void validate(NeuralNetwork neuralNetwork) {
-        validateStructure(neuralNetwork.getStructure());
-        validateLearning(neuralNetwork.getLearning());
-        validateDataset(neuralNetwork.getDataset());
-    }
-
-    private void validateStructure(Structure structure) {
+    public void validateStructure(Structure structure) {
         if (structure == null) {
             throw new StructureException("Structure is not initialized yet");
         }
@@ -37,7 +34,8 @@ public class FeedforwardValidator extends Validator {
         });
     }
 
-    private void validateLearning(Learning learning) {
+    @Override
+    public void validateLearning(Learning learning) {
         if (learning == null) {
             throw new LearningException("Learning method is not initialized yet");
         }
@@ -47,9 +45,10 @@ public class FeedforwardValidator extends Validator {
         }
     }
 
-    private void validateDataset(Dataset dataset) {
+    @Override
+    public void validateDataset(NeuralNetwork neuralNetwork, Dataset dataset) {
         if (dataset == null) {
-            throw new DatasetException("Dataset is not initialized yet");
+            throw new DatasetException("Dataset is empty");
         }
 
         if (dataset.getInputs() < 1) {
@@ -58,6 +57,31 @@ public class FeedforwardValidator extends Validator {
 
         if (dataset.getOutputs() < 1) {
             throw new DatasetException("It must have at least one output");
+        }
+
+        if (!neuralNetwork.getStructure().getLayers().getFirst().size().equals(dataset.getInputs())) {
+            throw new DatasetException("Number of input values is different than input layer size");
+        }
+
+        if (!neuralNetwork.getStructure().getLayers().getLast().size().equals(dataset.getOutputs())) {
+            throw new DatasetException("Number of output values is different than output layer size");
+        }
+
+        if (dataset.getRecords() == null) {
+            throw new DatasetException("Dataset does not have any records");
+        }
+
+        dataset.getRecords().forEach(record -> {
+            if (!dataset.getInputs().equals(record.getInputValues().size()) || !dataset.getOutputs().equals(record.getCorrectOutput().size())) {
+                throw new DatasetException("Records in dataset are incorrect");
+            }
+        });
+    }
+
+    @Override
+    public void validateInput(NeuralNetwork neuralNetwork, List<Double> input) {
+        if (input == null || input.size() != neuralNetwork.getStructure().getLayers().getFirst().size()) {
+            throw new NetworkException("Number of input values is different than input layer size");
         }
     }
 }

@@ -1,11 +1,11 @@
 package dev.vozniack.jlearning.neural.model.structure;
 
 import dev.vozniack.jlearning.neural.types.ActivationFunction;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class Layer {
 
     public Layer(List<Neuron> neurons, ActivationFunction activationFunction) {
@@ -13,7 +13,11 @@ public class Layer {
         this.activationFunction = activationFunction;
     }
 
-    private List<Neuron> neurons;
+    private final List<Neuron> neurons;
 
-    private ActivationFunction activationFunction;
+    private final ActivationFunction activationFunction;
+
+    public Integer size() {
+        return neurons.size();
+    }
 }
