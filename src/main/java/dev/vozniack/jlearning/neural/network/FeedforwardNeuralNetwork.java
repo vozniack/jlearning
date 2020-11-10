@@ -1,21 +1,19 @@
 package dev.vozniack.jlearning.neural.network;
 
+import dev.vozniack.jlearning.neural.launcher.FeedforwardLauncher;
 import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
-import dev.vozniack.jlearning.neural.model.structure.Neuron;
 import dev.vozniack.jlearning.neural.structure.Structure;
-import dev.vozniack.jlearning.neural.util.NetworkUtil;
 import dev.vozniack.jlearning.neural.util.RandUtil;
 import dev.vozniack.jlearning.neural.validator.FeedforwardValidator;
 import lombok.Builder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FeedforwardNeuralNetwork extends NeuralNetwork {
 
     public FeedforwardNeuralNetwork(Structure structure, Learning learning) {
-        super(structure, learning, new FeedforwardValidator());
+        super(structure, learning, new FeedforwardValidator(), new FeedforwardLauncher(structure));
     }
 
     @Builder
@@ -31,15 +29,12 @@ public class FeedforwardNeuralNetwork extends NeuralNetwork {
     @Override
     public void learn(Dataset dataset) {
         validate(dataset);
+        learning.learn();
     }
 
     @Override
     public List<Double> launch(List<Double> input) {
         validate(input);
-
-        NetworkUtil.initInput(structure, input);
-        NetworkUtil.countOutputs(structure);
-
-        return structure.getLayers().getLast().getNeurons().stream().map(Neuron::getOutput).collect(Collectors.toList());
+        return launcher.launch(input);
     }
 }

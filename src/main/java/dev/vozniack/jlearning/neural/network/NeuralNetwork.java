@@ -1,5 +1,6 @@
 package dev.vozniack.jlearning.neural.network;
 
+import dev.vozniack.jlearning.neural.launcher.Launcher;
 import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.structure.Structure;
@@ -11,19 +12,20 @@ import java.util.List;
 @Getter
 public abstract class NeuralNetwork {
 
-    public NeuralNetwork(Structure structure, Learning learning, Validator validator) {
+    public NeuralNetwork(Structure structure, Learning learning, Validator validator, Launcher launcher) {
         this.structure = structure;
         this.learning = learning;
         this.validator = validator;
+        this.launcher = launcher;
     }
 
     protected Structure structure;
 
     protected Learning learning;
 
-    protected Dataset dataset;
-
     protected Validator validator;
+
+    protected Launcher launcher;
 
     /* To implement */
 
