@@ -1,12 +1,12 @@
 package dev.vozniack.jlearning.neural.util;
 
-import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.learning.LearningType;
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Neuron;
 import dev.vozniack.jlearning.neural.network.FeedforwardNeuralNetwork;
 import dev.vozniack.jlearning.neural.network.NeuralNetwork;
-import dev.vozniack.jlearning.neural.structure.StructureFactory;
+import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
@@ -72,8 +72,8 @@ public class CountUtilTest {
     @Test
     public void countWeightTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 0.34d, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 0.34d, false))
                 .build();
 
         Neuron input = new Neuron();

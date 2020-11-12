@@ -4,7 +4,6 @@ import dev.vozniack.jlearning.neural.activation.ActivationFunction;
 import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
 import dev.vozniack.jlearning.neural.structure.Structure;
-import dev.vozniack.jlearning.neural.structure.StructureFactory;
 import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void createStructureTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8);
 
         assertNotNull(structure);
         assertTrue(structure.getBias());
@@ -33,7 +32,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void createStructureAndAddHiddenLayerTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, false, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, false, 4, 12, 8);
 
         assertNotNull(structure);
         assertFalse(structure.getBias());
@@ -49,7 +48,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void createStructureAndConnectionsWithBiasTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8);
 
         assertNotNull(structure);
         assertTrue(structure.getBias());
@@ -59,7 +58,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void createStructureAndConnectionsWithoutBiasTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, false, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, false, 4, 12, 8);
 
         assertNotNull(structure);
         assertFalse(structure.getBias());
@@ -69,7 +68,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void initWeightsTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, false, 4, 1);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, false, 4, 1);
         structure.initConnections(List.of(0.25d, 5d, 0.25d, 1d));
 
         assertEquals(Double.valueOf(0.25), structure.getConnections().get(0).getWeight());
@@ -80,7 +79,7 @@ public class FeedforwardStructureTest {
 
     @Test
     public void initIncorrectWeightsTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, false, 4, 1);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, false, 4, 1);
 
         StructureException structureException = assertThrows(StructureException.class, () -> structure.initConnections(List.of(0.25d, 5d, 0.25d)));
         assertEquals("Number of connections is different than number of new weights", structureException.getMessage());

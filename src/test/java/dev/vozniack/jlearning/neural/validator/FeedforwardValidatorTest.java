@@ -4,13 +4,13 @@ import dev.vozniack.jlearning.neural.exception.DatasetException;
 import dev.vozniack.jlearning.neural.exception.LearningException;
 import dev.vozniack.jlearning.neural.exception.NetworkException;
 import dev.vozniack.jlearning.neural.exception.StructureException;
-import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.learning.LearningType;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.model.operational.Record;
 import dev.vozniack.jlearning.neural.network.FeedforwardNeuralNetwork;
 import dev.vozniack.jlearning.neural.network.NeuralNetwork;
-import dev.vozniack.jlearning.neural.structure.StructureFactory;
+import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +24,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithCorrectStructureTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.init();
@@ -37,7 +37,7 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithoutStructureTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -49,8 +49,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateStructureWithoutLayersTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -62,8 +62,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateStructureWithoutConnectionsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.getStructure().setConnections(null);
@@ -77,8 +77,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateStructureWithoutConnectionsWeightsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.getStructure().getConnections().get(12).setWeight(null);
@@ -92,8 +92,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithCorrectLearningTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.init();
@@ -105,7 +105,7 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithoutLearningTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -117,8 +117,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateLearningWithoutPropertiesTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, null, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, null, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -130,8 +130,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithCorrectDatasetTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         List<Record> records = List.of(Record.builder()
@@ -148,8 +148,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithoutDatasetTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -161,8 +161,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithZeroInputsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -174,8 +174,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithZeroOutputsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -187,8 +187,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateDatasetWithNotMatchingInputs() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         Dataset dataset = Dataset.builder().inputs(8).outputs(8).build();
@@ -202,8 +202,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateDatasetWithNotMatchingOutputs() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         Dataset dataset = Dataset.builder().inputs(4).outputs(4).build();
@@ -217,8 +217,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateDatasetWithoutRecordsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         Dataset dataset = Dataset.builder().inputs(4).outputs(8).build();
@@ -232,8 +232,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateDatasetWithIncorrectRecordsTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         List<Record> records = List.of(Record.builder()
@@ -252,8 +252,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithCorrectInputTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();
@@ -263,8 +263,8 @@ public class FeedforwardValidatorTest {
     @Test
     public void validateNetworkWithIncorrectInputTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         FeedforwardValidator feedforwardValidator = new FeedforwardValidator();

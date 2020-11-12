@@ -1,5 +1,6 @@
 package dev.vozniack.jlearning.neural.learning;
 
+import dev.vozniack.jlearning.neural.exception.LearningException;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.network.NeuralNetwork;
 import lombok.Getter;
@@ -12,6 +13,23 @@ public abstract class Learning {
         this.tolerance = tolerance;
         this.factor = factor;
         this.shuffleRecords = shuffleRecords;
+    }
+
+    /* Factory */
+
+    public static Learning create(LearningType learningType, Integer iterations, Double tolerance, Double factor, Boolean shuffleRecords) {
+        switch (learningType) {
+            case BACKPROPAGATION:
+                return Backpropagation.builder()
+                        .iterations(iterations)
+                        .tolerance(tolerance)
+                        .factor(factor)
+                        .shuffleRecords(shuffleRecords)
+                        .build();
+
+            default:
+                throw new LearningException("How did you throw it?");
+        }
     }
 
     /* Network */

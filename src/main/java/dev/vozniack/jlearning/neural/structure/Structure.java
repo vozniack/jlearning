@@ -3,6 +3,8 @@ package dev.vozniack.jlearning.neural.structure;
 import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.model.structure.Connection;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
+import dev.vozniack.jlearning.neural.structure.feedforward.FeedforwardStructure;
+import dev.vozniack.jlearning.neural.structure.recursive.RecursiveStructure;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,17 +22,38 @@ public abstract class Structure {
         this.connections = new ArrayList<>();
     }
 
+    /* Factory */
+
+    public static Structure create(StructureType structureType, Boolean bias, Integer... neurons) {
+        switch (structureType) {
+            case FEEDFORWARD:
+                return new FeedforwardStructure(bias, neurons);
+
+            case RECURSIVE:
+                return new RecursiveStructure(bias, neurons);
+
+            default:
+                throw new StructureException("How did you throw it?");
+        }
+    }
+
+    /* Variables */
+
     protected Boolean bias;
 
     protected LinkedList<Layer> layers;
 
     protected List<Connection> connections;
 
+    /* To implement */
+
     public abstract void addLayer(Integer neurons);
 
     public abstract void addHiddenLayer(Integer neurons);
 
     public abstract void createConnections();
+
+    /* Initialization */
 
     public void initConnections(List<Double> weights) {
         if (connections.size() != weights.size()) {

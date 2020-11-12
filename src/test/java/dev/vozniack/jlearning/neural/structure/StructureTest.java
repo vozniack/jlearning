@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class StructureFactoryTest {
+public class StructureTest {
 
     @Test
     public void createFeedforwardStructureTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8);
 
         assertNotNull(structure);
         assertEquals(FeedforwardStructure.class, structure.getClass());
@@ -19,7 +19,7 @@ public class StructureFactoryTest {
 
     @Test
     public void createRecursiveStructureTest() {
-        Structure structure = StructureFactory.createStructure(StructureType.RECURSIVE, true, 4, 12, 8);
+        Structure structure = Structure.create(StructureType.RECURSIVE, true, 4, 12, 8);
 
         assertNotNull(structure);
         assertEquals(RecursiveStructure.class, structure.getClass());

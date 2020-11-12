@@ -1,10 +1,10 @@
 package dev.vozniack.jlearning.neural.network;
 
-import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.learning.LearningType;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.model.operational.Record;
-import dev.vozniack.jlearning.neural.structure.StructureFactory;
+import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ public class FeedforwardNeuralNetworkTest {
     @Test
     public void initNeuralNetworkTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 12, 8))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.init();
@@ -31,8 +31,8 @@ public class FeedforwardNeuralNetworkTest {
     @Test
     public void learnNeuralNetworkTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 2))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 128, 0.1, 1.0, true))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 2))
+                .learning(Learning.create(LearningType.BACKPROPAGATION, 128, 0.1, 1.0, true))
                 .build();
 
         neuralNetwork.init();
@@ -54,7 +54,7 @@ public class FeedforwardNeuralNetworkTest {
     @Test
     public void launchNeuralNetworkTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, false, 4, 2))
+                .structure(Structure.create(StructureType.FEEDFORWARD, false, 4, 2))
                 .build();
 
         neuralNetwork.init();
