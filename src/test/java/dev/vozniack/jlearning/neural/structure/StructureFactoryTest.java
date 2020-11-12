@@ -2,7 +2,6 @@ package dev.vozniack.jlearning.neural.structure;
 
 import dev.vozniack.jlearning.neural.structure.feedforward.FeedforwardStructure;
 import dev.vozniack.jlearning.neural.structure.recursive.RecursiveStructure;
-import dev.vozniack.jlearning.neural.types.StructureType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

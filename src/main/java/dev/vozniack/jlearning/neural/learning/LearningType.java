@@ -1,4 +1,4 @@
-package dev.vozniack.jlearning.neural.types;
+package dev.vozniack.jlearning.neural.learning;
 
 public enum LearningType {
     BACKPROPAGATION

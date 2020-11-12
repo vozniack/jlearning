@@ -5,13 +5,13 @@ import dev.vozniack.jlearning.neural.exception.LearningException;
 import dev.vozniack.jlearning.neural.exception.NetworkException;
 import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.learning.LearningType;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
 import dev.vozniack.jlearning.neural.model.operational.Record;
 import dev.vozniack.jlearning.neural.network.FeedforwardNeuralNetwork;
 import dev.vozniack.jlearning.neural.network.NeuralNetwork;
 import dev.vozniack.jlearning.neural.structure.StructureFactory;
-import dev.vozniack.jlearning.neural.types.LearningType;
-import dev.vozniack.jlearning.neural.types.StructureType;
+import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,21 +1,16 @@
 package dev.vozniack.jlearning.neural.activation;
 
-import dev.vozniack.jlearning.neural.types.ActivationType;
+public enum ActivationFunction {
+    BINARY(new BinaryActivation()),
+    SIGMOID(new SigmoidActivation());
 
-public abstract class ActivationFunction {
+    private final Activation activation;
 
-    public static ActivationFunction get(ActivationType activationType) {
-        switch (activationType) {
-            case BINARY:
-                return new BinaryActivation();
-
-            case SIGMOID:
-                return new SigmoidActivation();
-
-            default:
-                throw new RuntimeException();
-        }
+    ActivationFunction(Activation activation) {
+        this.activation = activation;
     }
 
-    public abstract Double activate(Double value);
+    public Double activate(Double value) {
+        return activation.activate(value);
+    }
 }

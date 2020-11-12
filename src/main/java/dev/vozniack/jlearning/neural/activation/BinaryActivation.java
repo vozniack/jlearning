@@ -1,6 +1,6 @@
 package dev.vozniack.jlearning.neural.activation;
 
-public class BinaryActivation extends ActivationFunction {
+public class BinaryActivation implements Activation {
 
     @Override
     public Double activate(Double value) {

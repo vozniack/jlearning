@@ -5,8 +5,7 @@ import dev.vozniack.jlearning.neural.exception.StructureException;
 import dev.vozniack.jlearning.neural.model.structure.Layer;
 import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.structure.StructureFactory;
-import dev.vozniack.jlearning.neural.types.ActivationType;
-import dev.vozniack.jlearning.neural.types.StructureType;
+import dev.vozniack.jlearning.neural.structure.StructureType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class FeedforwardStructureTest {
         List<Layer> layers = structure.getLayers();
         assertEquals(3, layers.size());
 
-        layers.forEach(layer -> assertEquals(ActivationFunction.get(ActivationType.SIGMOID).getClass(), layer.getActivationFunction().getClass()));
+        layers.forEach(layer -> assertEquals(ActivationFunction.SIGMOID, layer.getActivationFunction()));
 
         assertEquals(4, layers.get(0).getNeurons().size());
         assertEquals(12, layers.get(1).getNeurons().size());
