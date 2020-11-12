@@ -9,7 +9,6 @@ import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 public abstract class NeuralNetwork {
 
     public NeuralNetwork(Structure structure, Learning learning, Validator validator, Launcher launcher) {
@@ -19,12 +18,15 @@ public abstract class NeuralNetwork {
         this.launcher = launcher;
     }
 
+    @Getter
     protected Structure structure;
 
+    @Getter
     protected Learning learning;
 
     protected Validator validator;
 
+    @Getter
     protected Launcher launcher;
 
     /* To implement */
@@ -33,7 +35,9 @@ public abstract class NeuralNetwork {
 
     public abstract void learn(Dataset dataset);
 
-    public abstract List<Double> launch(List<Double> values);
+    public abstract void launch(List<Double> values);
+
+    public abstract List<Double> getOutput();
 
     /* Validation */
 

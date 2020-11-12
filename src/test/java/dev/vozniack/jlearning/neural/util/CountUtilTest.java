@@ -73,7 +73,7 @@ public class CountUtilTest {
     public void countWeightTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
                 .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 0.34d))
+                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 0.34d, false))
                 .build();
 
         Neuron input = new Neuron();
@@ -85,6 +85,6 @@ public class CountUtilTest {
         Connection connection = new Connection(input, output);
         connection.setWeight(0.64d);
 
-        assertEquals(Double.valueOf(0.500736), CountUtil.countWeight(neuralNetwork, connection));
+        assertEquals(Double.valueOf(0.500736), CountUtil.countWeight(neuralNetwork.getLearning(), connection));
     }
 }

@@ -51,12 +51,12 @@ public class FeedforwardValidator extends Validator {
             throw new DatasetException("Dataset is empty");
         }
 
-        if (dataset.getInputs() < 1) {
-            throw new DatasetException("It must have at least one input");
+        if (dataset.getInputs() == null || dataset.getInputs() < 1) {
+            throw new DatasetException("Dataset must have at least one input");
         }
 
-        if (dataset.getOutputs() < 1) {
-            throw new DatasetException("It must have at least one output");
+        if (dataset.getOutputs() == null || dataset.getOutputs() < 1) {
+            throw new DatasetException("Dataset must have at least one output");
         }
 
         if (!neuralNetwork.getStructure().getLayers().getFirst().size().equals(dataset.getInputs())) {

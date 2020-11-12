@@ -1,6 +1,8 @@
 package dev.vozniack.jlearning.neural.network;
 
 import dev.vozniack.jlearning.neural.learning.LearningFactory;
+import dev.vozniack.jlearning.neural.model.operational.Dataset;
+import dev.vozniack.jlearning.neural.model.operational.Record;
 import dev.vozniack.jlearning.neural.structure.StructureFactory;
 import dev.vozniack.jlearning.neural.types.LearningType;
 import dev.vozniack.jlearning.neural.types.StructureType;
@@ -18,12 +20,35 @@ public class FeedforwardNeuralNetworkTest {
     public void initNeuralNetworkTest() {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
                 .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 12, 8))
-                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0))
+                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 1024, 0.1, 1.0, false))
                 .build();
 
         neuralNetwork.init();
 
         assertNotNull(neuralNetwork);
+    }
+
+    @Test
+    public void learnNeuralNetworkTest() {
+        NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
+                .structure(StructureFactory.createStructure(StructureType.FEEDFORWARD, true, 4, 2))
+                .learning(LearningFactory.createLearning(LearningType.BACKPROPAGATION, 128, 0.1, 1.0, true))
+                .build();
+
+        neuralNetwork.init();
+
+        Dataset dataset = Dataset.builder()
+                .inputs(4)
+                .outputs(2)
+                .records(List.of(Record.builder()
+                        .inputValues(List.of(1d, 2d, 3d, 4d))
+                        .correctOutput(List.of(1d, 2d))
+                        .build()))
+                .build();
+
+        neuralNetwork.learn(dataset);
+
+        // #todo prepare real data for test
     }
 
     @Test
@@ -35,7 +60,8 @@ public class FeedforwardNeuralNetworkTest {
         neuralNetwork.init();
 
         neuralNetwork.getStructure().initConnections(List.of(0.25d, 0.75d, -0.25d, 1d, -0.5d, 0.5d, -0.75d, 1d));
-        List<Double> output = neuralNetwork.launch(List.of(1d, 2d, -1.5d, 0.75d));
+        neuralNetwork.launch(List.of(1d, 2d, -1.5d, 0.75d));
+        List<Double> output = neuralNetwork.getOutput();
 
         DecimalFormat decimalFormat = new DecimalFormat("#.#####");
 
