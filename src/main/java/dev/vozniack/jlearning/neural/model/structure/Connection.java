@@ -1,9 +1,11 @@
 package dev.vozniack.jlearning.neural.model.structure;
 
 import dev.vozniack.jlearning.neural.util.RandUtil;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Connection {
 
     public Connection(Neuron input, Neuron output) {

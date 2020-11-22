@@ -36,9 +36,9 @@ public class Backpropagation extends Learning {
             }
 
             records.forEach(record -> {
-                neuralNetwork.getLauncher().launch(record.getInputValues());
+                neuralNetwork.getLauncher().launch(record.getInputs());
 
-                countError(structure, record.getCorrectOutput());
+                countError(structure, record.getOutputs());
                 propagateError(structure);
             });
 

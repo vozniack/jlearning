@@ -135,8 +135,8 @@ public class FeedforwardValidatorTest {
                 .build();
 
         List<Record> records = List.of(Record.builder()
-                .inputValues(List.of(1d, 2d, 3d, 4d))
-                .correctOutput(List.of(1d, 2d, 3d, 4d, 5d, 6d, 7d, 8d))
+                .inputs(List.of(1d, 2d, 3d, 4d))
+                .outputs(List.of(1d, 2d, 3d, 4d, 5d, 6d, 7d, 8d))
                 .build());
 
         Dataset dataset = Dataset.builder().inputs(4).outputs(8).records(records).build();
@@ -237,8 +237,8 @@ public class FeedforwardValidatorTest {
                 .build();
 
         List<Record> records = List.of(Record.builder()
-                .inputValues(List.of(2d, 3d, 4d))
-                .correctOutput(List.of(1d, 2d, 3d, 4d, 5d, 6d, 7d, 8d))
+                .inputs(List.of(2d, 3d, 4d))
+                .outputs(List.of(1d, 2d, 3d, 4d, 5d, 6d, 7d, 8d))
                 .build());
 
         Dataset dataset = Dataset.builder().inputs(4).outputs(8).records(records).build();

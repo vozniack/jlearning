@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class Record {
 
-    private final List<Double> inputValues;
+    private final List<Double> inputs;
 
-    private final List<Double> correctOutput;
+    private final List<Double> outputs;
 }

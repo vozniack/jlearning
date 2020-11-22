@@ -72,7 +72,7 @@ public class FeedforwardValidator extends Validator {
         }
 
         dataset.getRecords().forEach(record -> {
-            if (!dataset.getInputs().equals(record.getInputValues().size()) || !dataset.getOutputs().equals(record.getCorrectOutput().size())) {
+            if (!dataset.getInputs().equals(record.getInputs().size()) || !dataset.getOutputs().equals(record.getOutputs().size())) {
                 throw new DatasetException("Records in dataset are incorrect");
             }
         });

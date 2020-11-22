@@ -3,11 +3,13 @@ package dev.vozniack.jlearning.neural.network;
 import dev.vozniack.jlearning.neural.learning.Learning;
 import dev.vozniack.jlearning.neural.learning.LearningType;
 import dev.vozniack.jlearning.neural.model.operational.Dataset;
-import dev.vozniack.jlearning.neural.model.operational.Record;
 import dev.vozniack.jlearning.neural.structure.Structure;
 import dev.vozniack.jlearning.neural.structure.StructureType;
+import dev.vozniack.jlearning.neural.util.DatasetUtil;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FeedforwardNeuralNetworkTest {
+    private final static String FILENAME = "src/test/resources/jLearning.csv";
 
     @Test
     public void initNeuralNetworkTest() {
@@ -29,26 +32,17 @@ public class FeedforwardNeuralNetworkTest {
     }
 
     @Test
-    public void learnNeuralNetworkTest() {
+    public void learnNeuralNetworkTest() throws IOException {
         NeuralNetwork neuralNetwork = FeedforwardNeuralNetwork.builder()
-                .structure(Structure.create(StructureType.FEEDFORWARD, true, 4, 2))
+                .structure(Structure.create(StructureType.FEEDFORWARD, true, 2, 4))
                 .learning(Learning.create(LearningType.BACKPROPAGATION, 128, 0.1, 1.0, true))
                 .build();
 
         neuralNetwork.init();
 
-        Dataset dataset = Dataset.builder()
-                .inputs(4)
-                .outputs(2)
-                .records(List.of(Record.builder()
-                        .inputValues(List.of(1d, 2d, 3d, 4d))
-                        .correctOutput(List.of(1d, 2d))
-                        .build()))
-                .build();
+        Dataset dataset = DatasetUtil.create(new File(FILENAME), ";");
 
         neuralNetwork.learn(dataset);
-
-        // #todo prepare real data for test
     }
 
     @Test
