@@ -9,13 +9,17 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Chromosome {
 
+    public Chromosome(Genome genome) {
+        this.genome = genome;
+    }
+
     private Genome genome;
 
-    private double fitness;
+    private double fitness = 0d;
 
-    private double distribution;
+    private double distribution = 0d;
 
-    private double percent;
+    private double percent = 0d;
 
     /* Copy */
 

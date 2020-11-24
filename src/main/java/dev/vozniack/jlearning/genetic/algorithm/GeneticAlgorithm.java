@@ -6,12 +6,13 @@ import dev.vozniack.jlearning.genetic.model.Properties;
 import dev.vozniack.jlearning.genetic.operator.GeneticOperator;
 import dev.vozniack.jlearning.genetic.operator.selection.Selection;
 import dev.vozniack.jlearning.genetic.validator.Validator;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-public abstract class GeneticAlgorithm {
+public class GeneticAlgorithm {
 
     public GeneticAlgorithm(Properties properties, Selection selection, List<GeneticOperator> operators, Population population, FitnessFunction fitnessFunction, Validator validator) {
         this.properties = properties;
@@ -22,27 +23,48 @@ public abstract class GeneticAlgorithm {
         this.validator = validator;
     }
 
+    @Builder
+    private static GeneticAlgorithm buildAlgorithm(Properties properties, Selection selection, List<GeneticOperator> operators, Population population, FitnessFunction fitnessFunction) {
+        return new GeneticAlgorithm(properties, selection, operators, population, fitnessFunction, new Validator());
+    }
+
     /* Properties */
 
-    protected Properties properties;
+    private final Properties properties;
 
-    protected Selection selection;
+    private final Selection selection;
 
-    protected List<GeneticOperator> operators;
+    private final List<GeneticOperator> operators;
 
-    protected Population population;
+    private final Population population;
 
-    protected FitnessFunction fitnessFunction;
+    private final FitnessFunction fitnessFunction;
 
-    protected Validator validator;
+    private final Validator validator;
 
     /* Algorithm variables */
 
-    protected int iteration;
+    private int iteration;
 
     /* Algorithm */
 
-    public abstract void init();
+    public void init() {
+        selection.setFitnessFunction(fitnessFunction);
+        population.populate();
 
-    public abstract void launch();
+        iteration = 0;
+    }
+
+    public void launch() {
+        validator.validate(this);
+
+        while (conditions()) {
+            selection.apply(population);
+            operators.forEach(operator -> operator.apply(population));
+        }
+    }
+
+    private Boolean conditions() {
+        return iteration++ <= properties.getIterations();
+    }
 }

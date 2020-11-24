@@ -2,12 +2,10 @@ package dev.vozniack.jlearning.genetic.operator.selection.method;
 
 import dev.vozniack.jlearning.genetic.model.Chromosome;
 import dev.vozniack.jlearning.genetic.operator.selection.Selection;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Builder
 @NoArgsConstructor
 public class TournamentSelection extends Selection {
 

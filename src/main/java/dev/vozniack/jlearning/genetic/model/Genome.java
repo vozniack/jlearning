@@ -13,7 +13,7 @@ public class Genome {
     private final int geneSize;
 
     @Setter
-    private byte[] bits;
+    private Integer[] bits;
 
     public Genome copy() {
         return new Genome(genes, geneSize, bits);
