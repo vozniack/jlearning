@@ -2,6 +2,7 @@ package dev.vozniack.jlearning.genetic.operator.mutation.method.binary;
 
 import dev.vozniack.jlearning.genetic.model.Chromosome;
 import dev.vozniack.jlearning.genetic.operator.mutation.Mutation;
+import dev.vozniack.jlearning.genetic.types.PopulationType;
 import dev.vozniack.jlearning.genetic.util.RandUtil;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.Arrays;
 public class FlipStringMutation extends Mutation {
 
     public FlipStringMutation(Double probability) {
-        super(probability);
+        super(PopulationType.BINARY, probability);
     }
 
     @Override
