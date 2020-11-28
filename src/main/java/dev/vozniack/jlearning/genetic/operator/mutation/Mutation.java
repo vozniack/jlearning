@@ -1,12 +1,16 @@
 package dev.vozniack.jlearning.genetic.operator.mutation;
 
 import dev.vozniack.jlearning.genetic.exception.MutationException;
+import dev.vozniack.jlearning.genetic.model.Chromosome;
 import dev.vozniack.jlearning.genetic.operator.GeneticOperator;
 import dev.vozniack.jlearning.genetic.operator.mutation.method.binary.FlipBitMutation;
 import dev.vozniack.jlearning.genetic.operator.mutation.method.binary.FlipStringMutation;
 import dev.vozniack.jlearning.genetic.operator.mutation.method.integer.InversionMutation;
 import dev.vozniack.jlearning.genetic.operator.mutation.method.integer.ScrambleMutation;
 import dev.vozniack.jlearning.genetic.operator.mutation.method.integer.SwapMutation;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Mutation extends GeneticOperator {
 
@@ -17,6 +21,15 @@ public abstract class Mutation extends GeneticOperator {
     /* Properties */
 
     protected Double probability;
+
+    /* Mutation */
+
+    @Override
+    public List<Chromosome> process(List<Chromosome> chromosomes) {
+        return chromosomes.stream().map(this::mutate).collect(Collectors.toList());
+    }
+
+    protected abstract Chromosome mutate(Chromosome chromosome);
 
     /* Factory */
 

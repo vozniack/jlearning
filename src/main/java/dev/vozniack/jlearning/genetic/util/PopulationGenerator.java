@@ -18,7 +18,7 @@ public class PopulationGenerator {
                 .collect(Collectors.toList());
     }
 
-    private static Integer[] buildGenome(PopulationType type, int genes, int geneSize) {
+    private static int[] buildGenome(PopulationType type, int genes, int geneSize) {
         switch (type) {
             case BINARY:
                 return buildBinaryPopulation(genes, geneSize);
@@ -31,15 +31,15 @@ public class PopulationGenerator {
         }
     }
 
-    private static Integer[] buildBinaryPopulation(int genes, int geneSize) {
+    private static int[] buildBinaryPopulation(int genes, int geneSize) {
         List<Integer> bits = IntStream.range(1, genes * geneSize).map(i -> RandUtil.randomBit()).boxed().collect(Collectors.toList());
-        return bits.toArray(new Integer[genes * geneSize]);
+        return bits.stream().mapToInt(bit -> bit).toArray();
     }
 
-    private static Integer[] buildIntegerPopulation(int genes, int geneSize) {
+    private static int[] buildIntegerPopulation(int genes, int geneSize) {
         List<Integer> bits = IntStream.range(1, genes * geneSize).boxed().collect(Collectors.toList());
         Collections.shuffle(bits);
 
-        return bits.toArray(new Integer[genes * geneSize]);
+        return bits.stream().mapToInt(bit -> bit).toArray();
     }
 }
