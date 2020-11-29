@@ -32,12 +32,12 @@ public class PopulationGenerator {
     }
 
     private static int[] buildBinaryPopulation(int genes, int geneSize) {
-        List<Integer> bits = IntStream.range(1, genes * geneSize).map(i -> RandUtil.randomBit()).boxed().collect(Collectors.toList());
+        List<Integer> bits = IntStream.range(0, genes * geneSize).map(i -> RandUtil.randomBit()).boxed().collect(Collectors.toList());
         return bits.stream().mapToInt(bit -> bit).toArray();
     }
 
     private static int[] buildIntegerPopulation(int genes, int geneSize) {
-        List<Integer> bits = IntStream.range(1, genes * geneSize).boxed().collect(Collectors.toList());
+        List<Integer> bits = IntStream.range(1, (genes * geneSize) + 1).boxed().collect(Collectors.toList());
         Collections.shuffle(bits);
 
         return bits.stream().mapToInt(bit -> bit).toArray();
