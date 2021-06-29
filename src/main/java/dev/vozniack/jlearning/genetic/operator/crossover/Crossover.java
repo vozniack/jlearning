@@ -7,6 +7,7 @@ import dev.vozniack.jlearning.genetic.operator.crossover.method.binary.TwoPointC
 import dev.vozniack.jlearning.genetic.operator.crossover.method.binary.UniformCrossover;
 import dev.vozniack.jlearning.genetic.operator.crossover.method.integer.OxCrossover;
 import dev.vozniack.jlearning.genetic.operator.crossover.method.integer.PmxCrossover;
+import dev.vozniack.jlearning.genetic.types.OperatorType;
 import dev.vozniack.jlearning.genetic.types.PopulationType;
 
 public abstract class Crossover extends GeneticOperator {
@@ -16,6 +17,7 @@ public abstract class Crossover extends GeneticOperator {
 
     public Crossover(PopulationType populationType, Double probability) {
         this.populationType = populationType;
+        this.type = OperatorType.CROSSOVER;
         this.probability = probability;
     }
 

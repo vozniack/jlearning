@@ -5,9 +5,14 @@ import dev.vozniack.jlearning.genetic.fitness.FitnessFunction;
 import dev.vozniack.jlearning.genetic.model.Population;
 import dev.vozniack.jlearning.genetic.operator.GeneticOperator;
 import dev.vozniack.jlearning.genetic.operator.selection.method.*;
+import dev.vozniack.jlearning.genetic.types.OperatorType;
 import lombok.Setter;
 
 public abstract class Selection extends GeneticOperator {
+
+    public Selection() {
+        this.type = OperatorType.SELECTION;
+    }
 
     @Setter
     protected FitnessFunction fitnessFunction;
